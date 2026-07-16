@@ -1,0 +1,193 @@
+:root {
+    --primary-color: #e11d48; /* Refined crimson rose */
+    --secondary-color: #71717a; /* Neutral zinc */
+    --bg-light: #fafafa; /* Minimalist clean background */
+    --text-color: #18181b; /* Dark zinc */
+    --card-bg: #ffffff;
+    --card-border: #e4e4e7;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Very subtle background glow */
+.bg-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -2;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.bg-glow-1 {
+    top: -15%;
+    left: -15%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, rgba(0,0,0,0) 70%);
+}
+
+.bg-glow-2 {
+    bottom: -15%;
+    right: -15%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(225, 29, 72, 0.08) 0%, rgba(0,0,0,0) 70%);
+}
+
+.bg-glow-3 {
+    display: none;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.prank-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Central Card */
+.surprise-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 45px 35px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    animation: cardLoad 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    width: 100%;
+}
+
+@keyframes cardLoad {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.heart-icon {
+    font-size: 2.8rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+.surprise-card h1 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #71717a;
+    margin-bottom: 30px;
+}
+
+.click-instruction-box {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.tap-hand {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    animation: bouncePointer 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes bouncePointer {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+.instruction-text {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* DYNAMIC FLOATING TEXT (CON CHÓ THỐI RAIN) */
+.floating-text {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--font-size, 1.5rem);
+    white-space: nowrap;
+    color: var(--primary-color);
+    text-shadow: 0 2px 4px rgba(225, 29, 72, 0.08);
+    top: -100px;
+    left: var(--left);
+    opacity: 0;
+    animation: rainFall var(--duration) linear forwards;
+}
+
+@keyframes rainFall {
+    0% {
+        transform: translateY(0) rotate(var(--rot-start));
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--opacity, 1);
+    }
+    90% {
+        opacity: var(--opacity, 1);
+    }
+    100% {
+        transform: translateY(115vh) rotate(var(--rot-end));
+        opacity: 0;
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+    .surprise-card {
+        padding: 35px 20px;
+    }
+    .surprise-card h1 {
+        font-size: 1.7rem;
+    }
+    .description {
+        font-size: 0.95rem;
+    }
+    .floating-text {
+        font-size: 1.5rem;
+    }
+}
