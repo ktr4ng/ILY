@@ -234,8 +234,9 @@ export const Scene3D: React.FC<Scene3DProps> = ({
 
       // Sky Backdrop Plane
       const textureLoader = new THREE.TextureLoader();
-      const skyTextureDay = textureLoader.load('/sky-day.jpeg');
-      const skyTextureNight = textureLoader.load('/sky-night.jpeg');
+      const base = import.meta.env.BASE_URL || './';
+      const skyTextureDay = textureLoader.load(`${base}sky-day.jpeg`);
+      const skyTextureNight = textureLoader.load(`${base}sky-night.jpeg`);
       skyTextureDay.wrapS = THREE.RepeatWrapping;
       skyTextureDay.wrapT = THREE.ClampToEdgeWrapping;
       skyTextureNight.wrapS = THREE.RepeatWrapping;
@@ -887,7 +888,7 @@ export const Scene3D: React.FC<Scene3DProps> = ({
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[380px] sm:w-[560px] h-[240px] sm:h-[340px] rounded-2xl overflow-hidden border-8 border-[#ded8ce] shadow-2xl z-0"
             style={{
-              backgroundImage: `url(${isNight ? '/sky-night.jpeg' : '/sky-day.jpeg'})`,
+              backgroundImage: `url(${isNight ? `${import.meta.env.BASE_URL || './'}sky-night.jpeg` : `${import.meta.env.BASE_URL || './'}sky-day.jpeg`})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
